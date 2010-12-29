@@ -28,14 +28,14 @@ from functools import partial
 
 
 __all__ = (
-    'get_dir_walker',
-    'walk',
-    'listdir',
-    'list_directories',
-    'list_files',
-    'absolute_path',
-    'real_absolute_path',
-    'parent_dir_path',
+'get_dir_walker',
+'walk',
+'listdir',
+'list_directories',
+'list_files',
+'absolute_path',
+'real_absolute_path',
+'parent_dir_path',
 )
 
 
@@ -45,7 +45,7 @@ def get_dir_walker(recursive, topdown=True, followlinks=False):
 
     :param recursive:
         ``True`` produces a recursive walker; ``False`` produces a non-recursive
-        walker
+        walker.
     :returns:
         A walker function.
     """
@@ -60,28 +60,18 @@ def get_dir_walker(recursive, topdown=True, followlinks=False):
     return walk
 
 
-def walk(pathname, recursive=True, depth=None, topdown=True, followlinks=False):
+def walk(pathname, topdown=True, followlinks=False, recursive=True):
     walk_func = get_dir_walker(recursive, topdown, followlinks)
-    current_depth = 1
-
-    if recursive and depth:
-        for root, dirnames, filenames in walk_func(pathname):
-            if current_depth == depth:
-                break
-            current_depth += 1
-            yield (root, dirnames, filenames)
-    else:
-        for root, dirnames, filenames in walk_func(pathname):
-            yield (root, dirnames, filenames)
+    for root, dirnames, filenames in walk_func(pathname):
+        yield (root, dirnames, filenames)
 
 
 def listdir(pathname,
             recursive=True,
-            depth=None,
             topdown=True,
             followlinks=False):
     for root, dirnames, filenames\
-    in walk(pathname, recursive, depth, topdown, followlinks):
+    in walk(pathname, recursive, topdown, followlinks):
         for dirname in dirnames:
             yield absolute_path(os.path.join(root, dirname))
         for filename in filenames:
@@ -90,22 +80,20 @@ def listdir(pathname,
 
 def list_directories(pathname,
                      recursive=True,
-                     depth=None,
                      topdown=True,
                      followlinks=False):
     for root, dirnames, filenames\
-    in walk(pathname, recursive, depth, topdown, followlinks):
+    in walk(pathname, recursive, topdown, followlinks):
         for dirname in dirnames:
             yield absolute_path(os.path.join(root, dirname))
 
 
 def list_files(pathname,
                recursive=True,
-               depth=None,
                topdown=True,
                followlinks=False):
     for root, dirnames, filenames\
-    in walk(pathname, recursive, depth, topdown, followlinks):
+    in walk(pathname, recursive, topdown, followlinks):
         for filename in filenames:
             yield absolute_path(os.path.join(root, filename))
 
