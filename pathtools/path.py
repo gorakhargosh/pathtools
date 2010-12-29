@@ -27,16 +27,16 @@ import os.path
 from functools import partial
 
 
-__all__ = (
-'get_dir_walker',
-'walk',
-'listdir',
-'list_directories',
-'list_files',
-'absolute_path',
-'real_absolute_path',
-'parent_dir_path',
-)
+__all__ = [
+    'get_dir_walker',
+    'walk',
+    'listdir',
+    'list_directories',
+    'list_files',
+    'absolute_path',
+    'real_absolute_path',
+    'parent_dir_path',
+]
 
 
 def get_dir_walker(recursive, topdown=True, followlinks=False):
@@ -100,7 +100,7 @@ def list_files(pathname,
 
 def absolute_path(path):
     """
-    Returns the absolute path for the given path and normalizes the path as well.
+    Returns the absolute path for the given path and normalizes the path.
 
     :param path:
         Path for which the absolute normalized path will be found.
