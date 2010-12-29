@@ -6,4 +6,3 @@
 #
 
 bin/python scripts/nosy.py .
-
