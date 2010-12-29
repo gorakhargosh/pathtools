@@ -25,9 +25,9 @@
 from fnmatch import fnmatch, fnmatchcase
 
 
-def match_patterns(pathname, patterns, case_sensitive=False):
+def match_against(pathname, patterns, case_sensitive=False):
     """
-    Returns True if the pathname matches any of the given patterns.
+    Determines whether the pathname matches any of the given wildcard patterns.
 
     :param pathname:
         A path name that will be matched against a wildcard pattern.
@@ -51,8 +51,8 @@ def _match(pathname,
            case_sensitive=False):
     """Internal function same as :func:`match` but does not check arguments."""
     return \
-        match_patterns(pathname, included_patterns) \
-        and not match_patterns(pathname, excluded_patterns)
+        match_against(pathname, included_patterns) \
+        and not match_against(pathname, excluded_patterns)
 
 
 def match(pathname,
@@ -109,4 +109,5 @@ def filter(pathnames,
         if _match(pathname, included, excluded, case_sensitive):
             yield pathname
 
-__all__ = ('match', 'match_patterns', 'filter')
+
+__all__ = ('match', 'match_against', 'filter')

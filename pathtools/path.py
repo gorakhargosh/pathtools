@@ -27,7 +27,7 @@ import os.path
 from functools import partial
 
 
-__all__ = [
+__all__ = (
     'get_dir_walker',
     'walk',
     'listdir',
@@ -36,7 +36,7 @@ __all__ = [
     'absolute_path',
     'real_absolute_path',
     'parent_dir_path',
-]
+)
 
 
 def get_dir_walker(recursive, topdown=True, followlinks=False):
