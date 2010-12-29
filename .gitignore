@@ -18,6 +18,7 @@ __MACOSX__
 # Ignore generated files and directories.
 *.egg-info/
 .installed.cfg
+.idea/
 build/
 dist/
 MANIFEST
