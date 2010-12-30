@@ -26,12 +26,14 @@
 :module: `pathtools.patterns`
 :author: Gora Khargosh <gora.khargosh@gmail.com>
 
-Utility functions to match_path and filter pathnames based on patterns.
+Utility functions to match against and filter pathnames based on wildcard
+patterns.
 """
 
 from fnmatch import fnmatch, fnmatchcase
 
 __all__ = ['match_path', 'match_path_against', 'filter_paths']
+
 
 def _string_lower(s):
     """
@@ -44,6 +46,7 @@ def _string_lower(s):
         Lowercased copy of string s.
     """
     return s.lower()
+
 
 def match_path_against(pathname, patterns, case_sensitive=True):
     """

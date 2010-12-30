@@ -60,40 +60,95 @@ def get_dir_walker(recursive, topdown=True, followlinks=False):
     return walk
 
 
-def walk(pathname, topdown=True, followlinks=False, recursive=True):
+def walk(dir_pathname, recursive=True, topdown=True, followlinks=False):
+    """
+    Walks a directory tree optionally recursively. Works exactly like
+    :func:`os.walk` only adding the `recursive` argument.
+
+    :param dir_pathname:
+        The directory to traverse.
+    :param recursive:
+        ``True`` for walking recursively walking through the directory tree;
+        ``False`` otherwise.
+    :param topdown:
+        Please see the documentation for :func:`os.walk`
+    :param followlinks:
+        Please see the documentation for :func:`os.walk`
+    """
     walk_func = get_dir_walker(recursive, topdown, followlinks)
-    for root, dirnames, filenames in walk_func(pathname):
+    for root, dirnames, filenames in walk_func(dir_pathname):
         yield (root, dirnames, filenames)
 
 
-def listdir(pathname,
+def listdir(dir_pathname,
             recursive=True,
             topdown=True,
             followlinks=False):
+    """
+    Enlists all items in a directory optionally recursively.
+
+    :param dir_pathname:
+        The directory to traverse.
+    :param recursive:
+        ``True`` for walking recursively walking through the directory tree;
+        ``False`` otherwise.
+    :param topdown:
+        Please see the documentation for :func:`os.walk`
+    :param followlinks:
+        Please see the documentation for :func:`os.walk`
+    """
     for root, dirnames, filenames\
-    in walk(pathname, recursive, topdown, followlinks):
+    in walk(dir_pathname, recursive, topdown, followlinks):
         for dirname in dirnames:
             yield absolute_path(os.path.join(root, dirname))
         for filename in filenames:
             yield absolute_path(os.path.join(root, filename))
 
 
-def list_directories(pathname,
+def list_directories(dir_pathname,
                      recursive=True,
                      topdown=True,
                      followlinks=False):
+    """
+    Enlists all the directories within the specified directory optionally
+    recursively.
+
+    :param dir_pathname:
+        The directory to traverse.
+    :param recursive:
+        ``True`` for walking recursively walking through the directory tree;
+        ``False`` otherwise.
+    :param topdown:
+        Please see the documentation for :func:`os.walk`
+    :param followlinks:
+        Please see the documentation for :func:`os.walk`
+    """
     for root, dirnames, filenames\
-    in walk(pathname, recursive, topdown, followlinks):
+    in walk(dir_pathname, recursive, topdown, followlinks):
         for dirname in dirnames:
             yield absolute_path(os.path.join(root, dirname))
 
 
-def list_files(pathname,
+def list_files(dir_pathname,
                recursive=True,
                topdown=True,
                followlinks=False):
+    """
+    Enlists all the files within the specified directory optionally
+    recursively.
+
+    :param dir_pathname:
+        The directory to traverse.
+    :param recursive:
+        ``True`` for walking recursively walking through the directory tree;
+        ``False`` otherwise.
+    :param topdown:
+        Please see the documentation for :func:`os.walk`
+    :param followlinks:
+        Please see the documentation for :func:`os.walk`
+    """
     for root, dirnames, filenames\
-    in walk(pathname, recursive, topdown, followlinks):
+    in walk(dir_pathname, recursive, topdown, followlinks):
         for filename in filenames:
             yield absolute_path(os.path.join(root, filename))
 
