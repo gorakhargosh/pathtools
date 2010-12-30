@@ -26,12 +26,12 @@
 :module: `pathtools.patterns`
 :author: Gora Khargosh <gora.khargosh@gmail.com>
 
-Utility functions to match and filter pathnames based on patterns.
+Utility functions to match_path and filter pathnames based on patterns.
 """
 
 from fnmatch import fnmatch, fnmatchcase
 
-__all__ = ['match', 'match_against', 'filter']
+__all__ = ['match_path', 'match_path_against', 'filter_paths']
 
 def _string_lower(s):
     """
@@ -45,7 +45,7 @@ def _string_lower(s):
     """
     return s.lower()
 
-def match_against(pathname, patterns, case_sensitive=True):
+def match_path_against(pathname, patterns, case_sensitive=True):
     """
     Determines whether the pathname matches any of the given wildcard patterns,
     optionally ignoring the case of the pathname and patterns.
@@ -53,22 +53,22 @@ def match_against(pathname, patterns, case_sensitive=True):
     :param pathname:
         A path name that will be matched against a wildcard pattern.
     :param patterns:
-        A list of wildcard patterns to match the filename against.
+        A list of wildcard patterns to match_path the filename against.
     :param case_sensitive:
         ``True`` if the matching should be case-sensitive; ``False`` otherwise.
     :returns:
         ``True`` if the pattern matches; ``False`` otherwise.
 
     Usage:
-    >>> match_against("/home/username/foobar/blah.py", ["*.py", "*.txt"], False)
+    >>> match_path_against("/home/username/foobar/blah.py", ["*.py", "*.txt"], False)
     True
-    >>> match_against("/home/username/foobar/blah.py", ["*.PY", "*.txt"], True)
+    >>> match_path_against("/home/username/foobar/blah.py", ["*.PY", "*.txt"], True)
     False
-    >>> match_against("/home/username/foobar/blah.py", ["*.PY", "*.txt"], False)
+    >>> match_path_against("/home/username/foobar/blah.py", ["*.PY", "*.txt"], False)
     True
-    >>> match_against("C:\\windows\\blah\\BLAH.PY", ["*.py", "*.txt"], True)
+    >>> match_path_against("C:\\windows\\blah\\BLAH.PY", ["*.py", "*.txt"], True)
     False
-    >>> match_against("C:\\windows\\blah\\BLAH.PY", ["*.py", "*.txt"], False)
+    >>> match_path_against("C:\\windows\\blah\\BLAH.PY", ["*.py", "*.txt"], False)
     True
     """
     if case_sensitive:
@@ -85,23 +85,23 @@ def match_against(pathname, patterns, case_sensitive=True):
     return False
 
 
-def _match(pathname,
-           included_patterns,
-           excluded_patterns,
-           case_sensitive=True):
-    """Internal function same as :func:`match` but does not check arguments.
+def _match_path(pathname,
+                included_patterns,
+                excluded_patterns,
+                case_sensitive=True):
+    """Internal function same as :func:`match_path` but does not check arguments.
 
-    Usage::
-        >>> _match("/users/gorakhargosh/foobar.py", ["*.py"], ["*.PY"], True)
-        True
-        >>> _match("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], True)
-        False
-        >>> _match("/users/gorakhargosh/foobar/", ["*.py"], ["*.txt"], False)
-        False
-        >>> _match("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], False)
-        Traceback (most recent call last):
-            ...
-        ValueError: conflicting patterns `set(['*.py'])` included and excluded
+    Usage:
+    >>> _match_path("/users/gorakhargosh/foobar.py", ["*.py"], ["*.PY"], True)
+    True
+    >>> _match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], True)
+    False
+    >>> _match_path("/users/gorakhargosh/foobar/", ["*.py"], ["*.txt"], False)
+    False
+    >>> _match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], False)
+    Traceback (most recent call last):
+        ...
+    ValueError: conflicting patterns `set(['*.py'])` included and excluded
     """
     if not case_sensitive:
         included_patterns = set(map(_string_lower, included_patterns))
@@ -113,14 +113,15 @@ def _match(pathname,
     if common_patterns:
         raise ValueError('conflicting patterns `%s` included and excluded'\
                          % common_patterns)
-    return (match_against(pathname, included_patterns, case_sensitive)\
-            and not match_against(pathname, excluded_patterns, case_sensitive))
+    return (match_path_against(pathname, included_patterns, case_sensitive)\
+            and not match_path_against(pathname, excluded_patterns,
+                                       case_sensitive))
 
 
-def match(pathname,
-          included_patterns=None,
-          excluded_patterns=None,
-          case_sensitive=True):
+def match_path(pathname,
+               included_patterns=None,
+               excluded_patterns=None,
+               case_sensitive=True):
     """
     Matches a pathname against a set of acceptable and ignored patterns.
 
@@ -129,11 +130,11 @@ def match(pathname,
     :param included_patterns:
         Allow filenames matching wildcard patterns specified in this list.
         If no pattern is specified, the function treats the pathname as
-        a match.
+        a match_path.
     :param excluded_patterns:
         Ignores filenames matching wildcard patterns specified in this list.
         If no pattern is specified, the function treats the pathname as
-        a match.
+        a match_path.
     :param case_sensitive:
         ``True`` if matching should be case-sensitive; ``False`` otherwise.
     :returns:
@@ -141,16 +142,32 @@ def match(pathname,
     :raises:
         ValueError if included patterns and excluded patterns contain the
         same pattern.
+
+    Usage:
+    >>> match_path("/Users/gorakhargosh/foobar.py")
+    True
+    >>> match_path("/Users/gorakhargosh/foobar.py", case_sensitive=False)
+    True
+    >>> match_path("/users/gorakhargosh/foobar.py", ["*.py"], ["*.PY"], True)
+    True
+    >>> match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], True)
+    False
+    >>> match_path("/users/gorakhargosh/foobar/", ["*.py"], ["*.txt"], False)
+    False
+    >>> match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], False)
+    Traceback (most recent call last):
+        ...
+    ValueError: conflicting patterns `set(['*.py'])` included and excluded
     """
     included = ["*"] if included_patterns is None else included_patterns
     excluded = [] if excluded_patterns is None else excluded_patterns
-    return _match(pathname, included, excluded, case_sensitive)
+    return _match_path(pathname, included, excluded, case_sensitive)
 
 
-def filter(pathnames,
-           included_patterns=None,
-           excluded_patterns=None,
-           case_sensitive=True):
+def filter_paths(pathnames,
+                 included_patterns=None,
+                 excluded_patterns=None,
+                 case_sensitive=True):
     """
     Filters from a set of paths based on acceptable patterns and
     ignorable patterns.
@@ -170,22 +187,22 @@ def filter(pathnames,
     :returns:
         A list of pathnames that matched the allowable patterns and passed
         through the ignored patterns.
+
+    Usage:
+    >>> pathnames = set(["/users/gorakhargosh/foobar.py", "/var/cache/pdnsd.status", "/etc/pdnsd.conf", "/usr/local/bin/python"])
+    >>> set(filter_paths(pathnames)) == pathnames
+    True
+    >>> set(filter_paths(pathnames, case_sensitive=False)) == pathnames
+    True
+    >>> set(filter_paths(pathnames, ["*.py", "*.conf"], ["*.status"], case_sensitive=True)) == set(["/users/gorakhargosh/foobar.py", "/etc/pdnsd.conf"])
+    True
     """
     included = ["*"] if included_patterns is None else included_patterns
     excluded = [] if excluded_patterns is None else excluded_patterns
 
     for pathname in pathnames:
-        # We don't call the public match because it checks arguments
+        # We don't call the public match_path because it checks arguments
         # and sets default values if none are found. We're already doing that
         # above.
-        if _match(pathname, included, excluded, case_sensitive):
+        if _match_path(pathname, included, excluded, case_sensitive):
             yield pathname
-
-
-def _test():
-    import doctest
-
-    doctest.testmod()
-
-if __name__ == "__main__":
-    _test()
