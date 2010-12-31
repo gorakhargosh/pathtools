@@ -60,4 +60,3 @@ setup(name='pathtools',
           ],
       packages=['pathtools']
       )
-
