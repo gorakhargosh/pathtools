@@ -22,6 +22,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+"""
+:module: pathtools.path
+:synopsis: Directory walking, listing, and path sanitizing functions.
+:author: Gora Khargosh <gora.khargosh@gmail.com>
+
+Functions
+---------
+.. autofunction:: get_dir_walker
+.. autofunction:: walk
+.. autofunction:: listdir
+.. autofunction:: list_directories
+.. autofunction:: list_files
+.. autofunction:: absolute_path
+.. autofunction:: real_absolute_path
+.. autofunction:: parent_dir_path
+"""
+
 import os.path
 import os.path
 from functools import partial
