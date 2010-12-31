@@ -85,7 +85,7 @@ def walk(dir_pathname, recursive=True, topdown=True, followlinks=False):
     :param dir_pathname:
         The directory to traverse.
     :param recursive:
-        ``True`` for walking recursively walking through the directory tree;
+        ``True`` for walking recursively through the directory tree;
         ``False`` otherwise.
     :param topdown:
         Please see the documentation for :func:`os.walk`
@@ -108,7 +108,7 @@ def listdir(dir_pathname,
     :param dir_pathname:
         The directory to traverse.
     :param recursive:
-        ``True`` for walking recursively walking through the directory tree;
+        ``True`` for walking recursively through the directory tree;
         ``False`` otherwise.
     :param topdown:
         Please see the documentation for :func:`os.walk`
@@ -134,7 +134,7 @@ def list_directories(dir_pathname,
     :param dir_pathname:
         The directory to traverse.
     :param recursive:
-        ``True`` for walking recursively walking through the directory tree;
+        ``True`` for walking recursively through the directory tree;
         ``False`` otherwise.
     :param topdown:
         Please see the documentation for :func:`os.walk`
@@ -158,7 +158,7 @@ def list_files(dir_pathname,
     :param dir_pathname:
         The directory to traverse.
     :param recursive:
-        ``True`` for walking recursively walking through the directory tree;
+        ``True`` for walking recursively through the directory tree;
         ``False`` otherwise.
     :param topdown:
         Please see the documentation for :func:`os.walk`
