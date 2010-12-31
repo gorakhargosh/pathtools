@@ -85,7 +85,8 @@ def listdir(dir_pathname,
             topdown=True,
             followlinks=False):
     """
-    Enlists all items in a directory optionally recursively.
+    Enlists all items using their absolute paths in a directory, optionally
+    recursively.
 
     :param dir_pathname:
         The directory to traverse.
@@ -110,8 +111,8 @@ def list_directories(dir_pathname,
                      topdown=True,
                      followlinks=False):
     """
-    Enlists all the directories within the specified directory optionally
-    recursively.
+    Enlists all the directories using their absolute paths within the specified
+    directory, optionally recursively.
 
     :param dir_pathname:
         The directory to traverse.
@@ -134,8 +135,8 @@ def list_files(dir_pathname,
                topdown=True,
                followlinks=False):
     """
-    Enlists all the files within the specified directory optionally
-    recursively.
+    Enlists all the files using their absolute paths within the specified
+    directory, optionally recursively.
 
     :param dir_pathname:
         The directory to traverse.
