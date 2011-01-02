@@ -4,7 +4,7 @@
 .. |author_email| replace:: gora.khargosh@gmail.com
 .. |copyright| replace:: Copyright (C) 2010 Gora Khargosh.
 .. |project_name| replace:: ``pathtools``
-.. |project_version| replace:: 0.1.0
+.. |project_version| replace:: 0.1.1
 
 .. _issue tracker: http://github.com/gorakhargosh/pathtools/issues
 .. _code repository: http://github.com/gorakhargosh/pathtools
