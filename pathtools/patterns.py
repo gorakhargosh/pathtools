@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # patterns.py: Common wildcard searching/filtering functionality for files.
 #
-# Copyright (C) 2010 Yesudeep Mangalapilly <gora.khargosh@gmail.com>
+# Copyright (C) 2010 Yesudeep Mangalapilly <yesudeep@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 """
 :module: pathtools.patterns
 :synopsis: Wildcard pattern matching and filtering functions for paths.
-:author: Yesudeep Mangalapilly <gora.khargosh@gmail.com>
+:author: Yesudeep Mangalapilly <yesudeep@gmail.com>
 
 Functions
 ---------
