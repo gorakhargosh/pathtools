@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # setup.py: Setup information.
-# Copyright (C) 2010 Gora Khargosh <gora.khargosh@gmail.com>
+# Copyright (C) 2010 Yesudeep Mangalapilly <gora.khargosh@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ setup(name='pathtools',
       version=version.VERSION_STRING,
       description='File system general utilities',
       long_description=read_file('README'),
-      author="Gora Khargosh",
+      author="Yesudeep Mangalapilly",
       author_email="gora.khargosh@gmail.com",
       license="MIT License",
       url="http://github.com/gorakhargosh/pathtools",

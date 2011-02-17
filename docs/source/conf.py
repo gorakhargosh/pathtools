@@ -27,8 +27,8 @@ sys.path.insert(0, SRC_DIR_PATH)
 import pathtools.version
 
 PROJECT_NAME = u'pathtools'
-AUTHOR_NAME = u'Gora Khargosh'
-COPYRIGHT = u'2010, Gora Khargosh'
+AUTHOR_NAME = u'Yesudeep Mangalapilly'
+COPYRIGHT = u'2010, Yesudeep Mangalapilly'
 
 
 # -- General configuration -----------------------------------------------------

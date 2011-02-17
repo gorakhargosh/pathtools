@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # path.py: Path functions.
 #
-# Copyright (C) 2010 Gora Khargosh <gora.khargosh@gmail.com>
+# Copyright (C) 2010 Yesudeep Mangalapilly <gora.khargosh@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 """
 :module: pathtools.path
 :synopsis: Directory walking, listing, and path sanitizing functions.
-:author: Gora Khargosh <gora.khargosh@gmail.com>
+:author: Yesudeep Mangalapilly <gora.khargosh@gmail.com>
 
 Functions
 ---------
