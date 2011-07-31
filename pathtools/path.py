@@ -71,9 +71,9 @@ def get_dir_walker(recursive, topdown=True, followlinks=False):
     else:
         def walk(path, topdown=topdown, followlinks=followlinks):
             try:
-                yield next(os.walk(path, topdown, followlinks))
+                yield next(os.walk(path, topdown=topdown, followlinks=followlinks))
             except NameError:
-                yield os.walk(path, topdown, followlinks).next() #IGNORE:E1101
+                yield os.walk(path, topdown=topdown, followlinks=followlinks).next() #IGNORE:E1101
     return walk
 
 
