@@ -23,7 +23,7 @@
 
 import os
 import imp
-from setuptools import setup
+from distutils.core import setup
 
 PKG_DIR = 'pathtools'
 version = imp.load_source('version',
