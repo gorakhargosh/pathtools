@@ -111,7 +111,7 @@ def _match_path(pathname,
         >>> _match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], False)
         Traceback (most recent call last):
             ...
-        ValueError: conflicting patterns `set(['*.py'])` included and excluded
+        ValueError: conflicting patterns `['*.py']` included and excluded
     """
     if not case_sensitive:
         included_patterns = set(map(_string_lower, included_patterns))
@@ -122,7 +122,7 @@ def _match_path(pathname,
     common_patterns = included_patterns & excluded_patterns
     if common_patterns:
         raise ValueError('conflicting patterns `%s` included and excluded'\
-                         % common_patterns)
+                         % list(common_patterns))
     return (match_path_against(pathname, included_patterns, case_sensitive)\
             and not match_path_against(pathname, excluded_patterns,
                                        case_sensitive))
@@ -167,7 +167,7 @@ def match_path(pathname,
         >>> match_path("/users/gorakhargosh/FOOBAR.PY", ["*.py"], ["*.PY"], False)
         Traceback (most recent call last):
             ...
-        ValueError: conflicting patterns `set(['*.py'])` included and excluded
+        ValueError: conflicting patterns `['*.py']` included and excluded
     """
     included = ["*"] if included_patterns is None else included_patterns
     excluded = [] if excluded_patterns is None else excluded_patterns

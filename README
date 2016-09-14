@@ -3,4 +3,9 @@ pathtools
 
 Pattern matching and various utilities for file systems paths.
 
+Tests
+=====
+To run the test suite, run the following in the project directory:
 
+    pip install tox
+    tox
